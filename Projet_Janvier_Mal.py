@@ -9,6 +9,7 @@ class Host:
         self.port = port
         self.host = host
         self.s = s
+        self.pos = os.getcwd()
 
    ## Bind socket du port
     def socket_bind(self):
@@ -27,18 +28,19 @@ class Host:
 
     def kep(self):
 
-        key = open("/key/key.txt", "rb")
+
+        key = open(fr"{self.pos}\key\key.txt", "rb")
         self.key_aes = key.read()
         key.close()
-        iv = open("/key/iv.txt", "rb")
+        iv = open(fr"{self.pos}\key\iv.txt", "rb")
         self.iv_aes = iv.read()
         iv.close()
         self.key = AES.new(self.key_aes, AES.MODE_CFB, self.iv_aes)
 
-        key2 = open("/key/key2.txt", "rb")
+        key2 = open(fr"{self.pos}\key\key2.txt", "rb")
         self.key_aes2 = key2.read()
         key2.close()
-        iv2 = open("/key/iv2.txt", "rb")
+        iv2 = open(fr"{self.pos}\key\iv2.txt", "rb")
         self.iv_aes2 = iv2.read()
         iv2.close()
         self.key2 = AES.new(self.key_aes2, AES.MODE_CFB, self.iv_aes2)
@@ -56,10 +58,12 @@ class Host:
 
     ######## receive the client commands######
     def receive_commands(self, conn):
-         while True:
+
+        while True:
             self.user = os.getenv('username')
             self.bool = True
-            Host.kep(self)
+            self.kep()
+
 
             self.data = conn.recv(1024)
             self.data = self.key.decrypt(self.data)

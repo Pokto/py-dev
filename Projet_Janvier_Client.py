@@ -1,7 +1,4 @@
-import sys, os
 import socket
-import subprocess
-import Crypto.Cipher
 from Crypto.Cipher import AES
 
 
@@ -11,11 +8,10 @@ class Connect:
         self.host = host
         self.s = s
 
-############################### Socket client################################################
     def socket_create(self):
-        self.host = input("IP host : ")                                            # Permet de recuperer l'info du entry (IP donnée dans l'interface graphique)
+        self.host = input("IP host : ")
 
-############### Connexion a distance ############################################
+
     def socket_connect(self):
         try:
             self.s.connect((self.host, self.port))
@@ -40,7 +36,6 @@ class Connect:
         self.key2 = AES.new(self.key_aes2, AES.MODE_CFB, self.iv_aes2)
 
 
-############### Envoie de la reponse des commandes################################
     def send_commands(self):
 
         msg = input('=>')
@@ -62,7 +57,7 @@ c.socket_create()
 c.socket_connect()
 c.send_commands()
 
-###################################################### SOURCES #########################################################
+## SOURCES ##
 #https://github.com/buckyroberts/Turtle/blob/master/Single_Client/client.py
 #https://www.youtube.com/watch?v=YGeRTVaBPoc
 #https://www.youtube.com/watch?v=jGnGnro2vsk

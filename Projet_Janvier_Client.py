@@ -1,3 +1,4 @@
+import os
 import socket
 from Crypto.Cipher import AES
 
@@ -7,6 +8,7 @@ class Connect:
         self.port = port
         self.host = host
         self.s = s
+        self.pos = os.getcwd()
 
     def socket_create(self):
         self.host = input("IP host : ")
@@ -19,18 +21,18 @@ class Connect:
             print("Socket connection error: " + str(msg))
 
     def kep(self):
-        key = open("/key/key.txt", "rb")
+        key = open(fr"{self.pos}\key\key.txt", "rb")
         self.key_aes = key.read()
         key.close()
-        iv = open("/key/iv.txt", "rb")
+        iv = open(fr"{self.pos}\key\iv.txt", "rb")
         self.iv_aes = iv.read()
         iv.close()
         self.key = AES.new(self.key_aes, AES.MODE_CFB, self.iv_aes)
 
-        key2 = open("/key/key2.txt", "rb")
+        key2 = open(fr"{self.pos}\key\key2.txt", "rb")
         self.key_aes2 = key2.read()
         key2.close()
-        iv2 = open("/key/iv2.txt", "rb")
+        iv2 = open(fr"{self.pos}\key\iv2.txt", "rb")
         self.iv_aes2 = iv2.read()
         iv2.close()
         self.key2 = AES.new(self.key_aes2, AES.MODE_CFB, self.iv_aes2)

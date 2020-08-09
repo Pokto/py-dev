@@ -10,7 +10,7 @@ class Host:
         self.host = host
         self.s = s
 
-    ############ Bind socket du port (l'host et le port de communication prennent place) et attend la connexion du client
+   ## Bind socket du port
     def socket_bind(self):
         try:
             self.s.bind((self.host, self.port))
@@ -54,7 +54,7 @@ class Host:
         self.cmd_str = self.key2.encrypt(self.cmd_str)
 
 
-    ######################### Recois la commande de la machine disant##########################################
+    ######## receive the client commands######
     def receive_commands(self, conn):
          while True:
             self.user = os.getenv('username')
@@ -103,7 +103,7 @@ def main():
 main()
 
 
-###################################################### SOURCES #########################################################
+### SOURCES ####
 #https://github.com/buckyroberts/Turtle/blob/master/Single_Client/server.py
 #https://stackoverflow.com/questions/31756166/python-3-socket-chat-encryption-with-pycrypto-gives-unicodedecodeerror
 

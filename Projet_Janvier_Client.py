@@ -44,7 +44,7 @@ class Connect:
 
             msg = msg.encode('utf-8')
             msg = self.key.encrypt(msg)
-            self.s.send(msg)                                 # envoie la commande exit
+            self.s.send(msg)
             data = self.s.recv(1024)
             data = self.key2.decrypt(data)
             data = data.decode('utf-8', 'ignore')

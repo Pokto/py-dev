@@ -13,7 +13,7 @@ class Connect:
 
 ############################### Socket client################################################
     def socket_create(self):
-        self.host = input("IP hos : ")                                            # Permet de recuperer l'info du entry (IP donnée dans l'interface graphique)
+        self.host = input("IP host : ")                                            # Permet de recuperer l'info du entry (IP donnée dans l'interface graphique)
 
 ############### Connexion a distance ############################################
     def socket_connect(self):
